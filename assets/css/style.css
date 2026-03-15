@@ -218,7 +218,6 @@ body {
 .section--cottage {
   background: var(--color-section-bg);
   align-items: flex-start;
-  overflow-y: auto;
 }
 
 .section--cottage .section-inner {
@@ -370,7 +369,6 @@ body {
 .section--gallery {
   background: var(--color-section-bg-alt);
   align-items: flex-start;
-  overflow-y: auto; /* allow internal scroll for large photo sets */
 }
 
 .gallery-grid {
