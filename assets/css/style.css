@@ -1,0 +1,569 @@
+/* =============================================================
+   RESET & CUSTOM PROPERTIES
+   ============================================================= */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-bg:         #0d1117;
+  --color-bg-alt:     #111820;
+  --color-section-bg:     rgba(13, 17, 23, 0.82);
+  --color-section-bg-alt: rgba(17, 24, 32, 0.82);
+  --color-text:       #e6e2db;
+  --color-text-muted: #8a8680;
+  --color-accent:     #6d9ea0;
+  --color-border:     rgba(255, 255, 255, 0.08);
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+
+  --section-pad: clamp(3rem, 8vh, 6rem) clamp(1.5rem, 6vw, 6rem);
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-weight: 300;
+  line-height: 1.7;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* =============================================================
+   SCROLL CONTAINER
+   ============================================================= */
+
+.scroll-container {
+  position: relative;
+  z-index: 1;
+  height: 100dvh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* =============================================================
+   SECTIONS — BASE
+   ============================================================= */
+
+.section {
+  min-height: 100dvh;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-inner {
+  width: 100%;
+  max-width: 1200px;
+  padding: var(--section-pad);
+}
+
+.section-header {
+  margin-bottom: clamp(2rem, 5vh, 4rem);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.section-intro {
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+  color: var(--color-text-muted);
+  max-width: 56ch;
+}
+
+/* =============================================================
+   DOT NAVIGATION
+   ============================================================= */
+
+.dot-nav {
+  position: fixed;
+  right: 1.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+  position: relative;
+}
+
+.dot::after {
+  content: attr(data-label);
+  position: absolute;
+  right: calc(100% + 0.75rem);
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+
+.dot:hover::after,
+.dot.active::after {
+  opacity: 1;
+}
+
+.dot:hover,
+.dot.active {
+  background: white;
+  border-color: white;
+  transform: scale(1.3);
+}
+
+/* =============================================================
+   HERO VIDEO — fixed behind everything
+   ============================================================= */
+
+.hero-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.hero-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.15) 0%,
+    rgba(0, 0, 0, 0.40) 55%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
+  z-index: -1;
+}
+
+/* =============================================================
+   HERO SECTION
+   ============================================================= */
+
+.section--hero {
+  background: transparent;
+}
+
+.hero-title {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(4.5rem, 15vw, 13rem);
+  letter-spacing: 0.08em;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 60px rgba(0, 0, 0, 0.25);
+}
+
+.hero-subtitle {
+  position: absolute;
+  bottom: clamp(2.5rem, 6vh, 4.5rem);
+  left: 0;
+  right: 0;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: clamp(0.65rem, 1.4vw, 0.8rem);
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* =============================================================
+   THE COTTAGE
+   ============================================================= */
+
+.section--cottage {
+  background: var(--color-section-bg);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 2rem;
+}
+
+.feature-card {
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.5rem;
+}
+
+.feature-card h3 {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 1rem;
+}
+
+.feature-card ul {
+  list-style: none;
+}
+
+.feature-card li {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.feature-card li:last-child {
+  border-bottom: none;
+}
+
+/* =============================================================
+   LOCATION
+   ============================================================= */
+
+.section--location {
+  background: var(--color-section-bg-alt);
+}
+
+.section-intro--pull {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-text);
+  max-width: 48ch;
+}
+
+.location-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  max-width: 820px;
+}
+
+.location-body p {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.85;
+}
+
+/* =============================================================
+   ACTIVITIES
+   ============================================================= */
+
+.section--activities {
+  background: var(--color-section-bg);
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+
+.activity-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--color-border);
+  padding: 1.75rem;
+  transition: background 0.2s;
+}
+
+.activity-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.activity-card h3 {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.75rem;
+}
+
+.activity-card p {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  line-height: 1.75;
+}
+
+/* =============================================================
+   GALLERY
+   ============================================================= */
+
+.section--gallery {
+  background: var(--color-section-bg-alt);
+  align-items: flex-start;
+}
+
+.section--gallery .section-inner {
+  padding-top: clamp(3rem, 8vh, 6rem);
+  padding-bottom: clamp(3rem, 8vh, 6rem);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 200px;
+  gap: 0.4rem;
+}
+
+.gallery-placeholder {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px dashed var(--color-border);
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* =============================================================
+   FIND US
+   ============================================================= */
+
+.section--find-us {
+  background: var(--color-section-bg);
+  align-items: stretch;
+  padding: 0;
+}
+
+/* Full-bleed split: map left, panel right */
+.find-us-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  height: 100dvh; /* must be a fixed height so grid rows stretch and Leaflet can measure */
+}
+
+.find-us-map {
+  height: 100%; /* Leaflet requires a concrete height on its container */
+}
+
+/* Custom marker */
+.map-marker__dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 2px solid white;
+  box-shadow: 0 0 0 4px rgba(109, 158, 160, 0.3);
+}
+
+/* Popup */
+.leaflet-popup-content-wrapper.map-popup,
+.map-popup .leaflet-popup-content-wrapper {
+  background: rgba(13, 17, 23, 0.95);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 2px;
+  box-shadow: none;
+}
+
+.map-popup .leaflet-popup-tip {
+  background: rgba(13, 17, 23, 0.95);
+}
+
+.map-popup .leaflet-popup-content {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.map-popup a {
+  color: var(--color-accent);
+}
+
+/* Override Leaflet's default light UI to suit the dark theme */
+.find-us-map .leaflet-tile-pane {
+  filter: brightness(0.9);
+}
+
+.find-us-map .leaflet-control-attribution {
+  background: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.6rem;
+}
+
+.find-us-map .leaflet-control-attribution a {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.find-us-map .leaflet-control-zoom a {
+  background: rgba(20, 25, 35, 0.9);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.find-us-map .leaflet-control-zoom a:hover {
+  background: rgba(40, 50, 65, 0.95);
+}
+
+.find-us-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--section-pad);
+  max-width: 560px;
+}
+
+.find-us-panel .section-header {
+  margin-bottom: clamp(1.5rem, 4vh, 3rem);
+}
+
+.find-us-directions,
+.find-us-contact {
+  margin-bottom: 2.5rem;
+}
+
+.find-us-directions h3,
+.find-us-contact h3 {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.875rem;
+}
+
+.find-us-directions p,
+.find-us-contact p {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  line-height: 1.85;
+  margin-bottom: 0.5rem;
+}
+
+/* what3words link */
+.w3w-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1em;
+  margin-top: 0.875rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.w3w-link:hover {
+  color: var(--color-text);
+}
+
+.w3w-logo {
+  color: #e11f26; /* what3words brand red */
+  font-weight: 700;
+  font-size: 1em;
+  line-height: 1;
+}
+
+.contact-link {
+  display: inline-block;
+  margin-top: 0.75rem;
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--color-accent);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.contact-link:hover {
+  color: var(--color-accent);
+  border-color: transparent;
+}
+
+/* =============================================================
+   RESPONSIVE
+   ============================================================= */
+
+@media (max-width: 768px) {
+  .dot-nav {
+    right: 1rem;
+    gap: 0.7rem;
+  }
+
+  /* Labels take too much space on narrow screens */
+  .dot::after {
+    display: none;
+  }
+
+  .location-body {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stack map above panel on mobile */
+  .find-us-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: 45dvh 1fr;
+    height: auto;
+  }
+
+  .find-us-map {
+    height: 45dvh;
+  }
+
+  .find-us-panel {
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-grid,
+  .activity-grid {
+    grid-template-columns: 1fr;
+  }
+}

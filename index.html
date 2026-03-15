@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>196 Droman — A family holiday cottage in the wilds of North West Scotland</title>
+  <meta name="description" content="A family holiday cottage in the wilds of North West Scotland, on the coast of Sutherland.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Fixed video background — persists behind all sections -->
+  <video class="hero-video" autoplay muted loop playsinline poster="assets/images/hero-poster.jpg">
+    <source src="assets/video/hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <nav class="dot-nav" aria-label="Page sections">
+    <a href="#hero"       class="dot" data-label="Home"        aria-label="Home"></a>
+    <a href="#cottage"    class="dot" data-label="The Cottage" aria-label="The Cottage"></a>
+    <a href="#location"   class="dot" data-label="Location"    aria-label="Location"></a>
+    <a href="#activities" class="dot" data-label="Activities"  aria-label="Activities"></a>
+    <a href="#gallery"    class="dot" data-label="Gallery"     aria-label="Gallery"></a>
+    <a href="#find-us"    class="dot" data-label="Find Us"     aria-label="Find Us"></a>
+  </nav>
+
+  <main class="scroll-container" id="scroll-container">
+
+    <!-- ── Hero ─────────────────────────────────────────────────── -->
+    <section id="hero" class="section section--hero" aria-label="Welcome">
+      <h1 class="hero-title">196 Droman</h1>
+      <p class="hero-subtitle">A family holiday cottage in the wilds of North West Scotland</p>
+    </section>
+
+    <!-- ── The Cottage ───────────────────────────────────────────── -->
+    <section id="cottage" class="section section--cottage" aria-labelledby="cottage-heading">
+      <div class="section-inner">
+        <header class="section-header">
+          <h2 id="cottage-heading" class="section-title">The Cottage</h2>
+          <p class="section-intro">A comfortable base for exploring the far north-west, owned by the same family for over 40 years.</p>
+        </header>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>Downstairs</h3>
+            <ul>
+              <li>Living room with open fireplace</li>
+              <li>Kitchen &amp; dining table (seats 6–8)</li>
+              <li>Enclosed sun porch</li>
+              <li>Cloakroom &amp; utility room with laundry</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <h3>Upstairs</h3>
+            <ul>
+              <li>King bedroom</li>
+              <li>Twin bedroom (convertible to double)</li>
+              <li>Large bedroom &amp; dayroom with king bed</li>
+              <li>Bathroom with bath &amp; electric shower</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <h3>Outside</h3>
+            <ul>
+              <li>Two parking spaces</li>
+              <li>Open grounds &amp; washing line</li>
+              <li>Two sea kayaks available on request</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Location ──────────────────────────────────────────────── -->
+    <section id="location" class="section section--location" aria-labelledby="location-heading">
+      <div class="section-inner">
+        <header class="section-header">
+          <h2 id="location-heading" class="section-title">The Location</h2>
+          <p class="section-intro section-intro--pull">"As far north-west as you can get on this island — you really can't get much further away from it all."</p>
+        </header>
+        <div class="location-body">
+          <p>Droman is a small hamlet on Scotland's north-western coast, near Balchrick in Sutherland. A rocky bay and pier are a two-minute walk from the door; sandy beaches are five minutes across the hills.</p>
+          <p>The wider landscape is moorlands, lochans, and bare rocky mountains. Northwest Sutherland is one of the most sparsely populated and hauntingly beautiful places in Britain.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Activities ────────────────────────────────────────────── -->
+    <section id="activities" class="section section--activities" aria-labelledby="activities-heading">
+      <div class="section-inner">
+        <header class="section-header">
+          <h2 id="activities-heading" class="section-title">Activities</h2>
+          <p class="section-intro">The area rewards those who love the outdoors — from mountain walks to sea-bird watching.</p>
+        </header>
+        <div class="activity-grid">
+          <div class="activity-card">
+            <h3>Walking &amp; Climbing</h3>
+            <p>Foinaven, Arkle, and Stack rise from the moorland nearby. The 8-mile walk to remote Sandwood Bay is a highlight of any stay.</p>
+          </div>
+          <div class="activity-card">
+            <h3>Fishing</h3>
+            <p>Salt-water fishing requires no permit. Freshwater permits are available through Scourie Angling — details at the cottage.</p>
+          </div>
+          <div class="activity-card">
+            <h3>Handa Island</h3>
+            <p>Internationally famous for its seabird colonies — Britain's largest guillemot breeding population, plus puffins. Ferry from Tarbet.</p>
+          </div>
+          <div class="activity-card">
+            <h3>Cape Wrath &amp; Durness</h3>
+            <p>40 minutes north: beaches, Smoo Cave, Cape Wrath lighthouse, and Balnakeil Craft Village.</p>
+          </div>
+          <div class="activity-card">
+            <h3>Kylesku</h3>
+            <p>Boat trips to see seals and eagles, with a view of Europe's tallest waterfall.</p>
+          </div>
+          <div class="activity-card">
+            <h3>Kayaking</h3>
+            <p>Two full-size sea kayaks with life jackets are available at the cottage on request, at your own risk.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Gallery ───────────────────────────────────────────────── -->
+    <section id="gallery" class="section section--gallery" aria-labelledby="gallery-heading">
+      <div class="section-inner">
+        <header class="section-header">
+          <h2 id="gallery-heading" class="section-title">Gallery</h2>
+        </header>
+        <div class="gallery-grid">
+          <!-- Replace .gallery-placeholder divs with <img> elements -->
+          <div class="gallery-placeholder"></div>
+          <div class="gallery-placeholder"></div>
+          <div class="gallery-placeholder"></div>
+          <div class="gallery-placeholder"></div>
+          <div class="gallery-placeholder"></div>
+          <div class="gallery-placeholder"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Find Us ───────────────────────────────────────────────── -->
+    <section id="find-us" class="section section--find-us" aria-labelledby="find-us-heading">
+      <div class="find-us-layout">
+        <div class="find-us-map" id="map" aria-label="Map showing location of 196 Droman"></div>
+        <div class="find-us-panel">
+          <header class="section-header">
+            <h2 id="find-us-heading" class="section-title">Find Us</h2>
+          </header>
+          <div class="find-us-directions">
+            <h3>Getting Here</h3>
+            <p>Take the A894 to Kinlochbervie, then follow signs for Balchrick. Continue to the end of the road — you're as far north-west as it gets.</p>
+            <a class="w3w-link" href="https://what3words.com/pleaser.bandaged.skis" target="_blank" rel="noopener" aria-label="what3words location">
+              <span class="w3w-logo" aria-hidden="true">///</span>pleaser.bandaged.skis
+            </a>
+          </div>
+          <div class="find-us-contact">
+            <h3>Enquiries</h3>
+            <p>For availability and enquiries, please get in touch.</p>
+            <!-- email address to be added -->
+            <a href="mailto:" class="contact-link">Contact us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
