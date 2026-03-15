@@ -33,7 +33,7 @@ dots.forEach((dot) => {
 // ── Cottage photo swap ───────────────────────────────────────────────────────
 const cottageImg        = document.querySelector('.cottage-photo img');
 const cottageCaption    = document.querySelector('.cottage-photo figcaption');
-const defaultCottageSrc = 'assets/images/IMG_0966.jpeg';
+const defaultCottageSrc = 'assets/images/IMG_0966.webp';
 
 function fadeSwap(src) {
   cottageImg.style.opacity = '0';
