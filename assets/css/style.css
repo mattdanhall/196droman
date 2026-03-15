@@ -92,7 +92,6 @@ body {
 .section-intro {
   font-size: clamp(0.9rem, 1.5vw, 1.05rem);
   color: var(--color-text-muted);
-  max-width: 56ch;
 }
 
 /* =============================================================
@@ -218,6 +217,34 @@ body {
 
 .section--cottage {
   background: var(--color-section-bg);
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+.section--cottage .section-inner {
+  padding-top: clamp(3rem, 8vh, 6rem);
+  padding-bottom: clamp(3rem, 8vh, 6rem);
+}
+
+.cottage-photo {
+  margin-bottom: 2rem;
+}
+
+.cottage-photo img {
+  width: 100%;
+  max-height: 38vh;
+  object-fit: cover;
+  display: block;
+  transition: opacity 0.2s;
+}
+
+.cottage-photo figcaption {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  font-style: italic;
 }
 
 .feature-grid {
@@ -250,6 +277,15 @@ body {
   color: var(--color-text-muted);
   padding: 0.4rem 0;
   border-bottom: 1px solid var(--color-border);
+  transition: color 0.2s;
+}
+
+.feature-card li[data-image] {
+  cursor: pointer;
+}
+
+.feature-card li[data-image]:hover {
+  color: var(--color-text);
 }
 
 .feature-card li:last-child {
@@ -334,11 +370,7 @@ body {
 .section--gallery {
   background: var(--color-section-bg-alt);
   align-items: flex-start;
-}
-
-.section--gallery .section-inner {
-  padding-top: clamp(3rem, 8vh, 6rem);
-  padding-bottom: clamp(3rem, 8vh, 6rem);
+  overflow-y: auto; /* allow internal scroll for large photo sets */
 }
 
 .gallery-grid {
@@ -515,6 +547,59 @@ body {
 .contact-link:hover {
   color: var(--color-accent);
   border-color: transparent;
+}
+
+/* =============================================================
+   LIGHTBOX
+   ============================================================= */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+  cursor: zoom-out;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox__img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  cursor: default;
+  box-shadow: 0 8px 60px rgba(0, 0, 0, 0.6);
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.5rem;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0.25rem;
+}
+
+.lightbox__close:hover {
+  color: white;
+}
+
+.gallery-grid img {
+  cursor: zoom-in;
 }
 
 /* =============================================================

@@ -1,4 +1,4 @@
-document.querySelector('.hero-video').playbackRate = 0.5;
+document.querySelector('.hero-video').playbackRate = 0.8;
 
 const scrollContainer = document.getElementById('scroll-container');
 const sections = document.querySelectorAll('.section');
@@ -29,6 +29,55 @@ dots.forEach((dot) => {
     if (target) target.scrollIntoView({ behavior: 'smooth' });
   });
 });
+
+// ── Cottage photo swap ───────────────────────────────────────────────────────
+const cottageImg        = document.querySelector('.cottage-photo img');
+const cottageCaption    = document.querySelector('.cottage-photo figcaption');
+const defaultCottageSrc = 'assets/images/IMG_0966.jpeg';
+
+function fadeSwap(src) {
+  cottageImg.style.opacity = '0';
+  setTimeout(() => {
+    cottageImg.src = src;
+    cottageImg.style.opacity = '1';
+    cottageCaption.style.visibility = src === defaultCottageSrc ? 'visible' : 'hidden';
+  }, 200);
+}
+
+document.querySelectorAll('.feature-card li[data-image]').forEach((li) => {
+  li.addEventListener('mouseenter', () => fadeSwap(`assets/images/${li.dataset.image}`));
+  li.addEventListener('click',      () => fadeSwap(`assets/images/${li.dataset.image}`));
+});
+
+document.querySelector('.feature-grid').addEventListener('mouseleave', () => fadeSwap(defaultCottageSrc));
+cottageImg.addEventListener('click', () => fadeSwap(defaultCottageSrc));
+
+// ── Lightbox ─────────────────────────────────────────────────────────────────
+const lightbox = document.createElement('div');
+lightbox.className = 'lightbox';
+lightbox.innerHTML = '<img class="lightbox__img" src="" alt=""><button class="lightbox__close" aria-label="Close image">&#215;</button>';
+document.body.appendChild(lightbox);
+
+const lightboxImg   = lightbox.querySelector('.lightbox__img');
+const lightboxClose = lightbox.querySelector('.lightbox__close');
+
+function openLightbox(src, alt) {
+  lightboxImg.src = src;
+  lightboxImg.alt = alt;
+  lightbox.classList.add('is-open');
+}
+
+function closeLightbox() {
+  lightbox.classList.remove('is-open');
+}
+
+document.querySelectorAll('.gallery-grid img').forEach((img) => {
+  img.addEventListener('click', () => openLightbox(img.src, img.alt));
+});
+
+lightbox.addEventListener('click', (e) => { if (e.target !== lightboxImg) closeLightbox(); });
+lightboxClose.addEventListener('click', closeLightbox);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 
 // ── Map ──────────────────────────────────────────────────────────────────────
 const DROMAN_LAT  = 58.485568;
