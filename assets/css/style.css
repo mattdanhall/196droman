@@ -425,7 +425,7 @@ body {
    ============================================================= */
 
 .section--visit {
-  background: var(--color-section-bg);
+  background: transparent;
 }
 
 .visit-grid {
