@@ -1,4 +1,7 @@
-document.querySelector('.hero-video').playbackRate = 0.8;
+const heroVideo = document.querySelector('.hero-video');
+heroVideo.querySelector('source').src = `assets/video/hero_${Math.floor(Math.random() * 6)}.webm`;
+heroVideo.load();
+heroVideo.playbackRate = 0.8;
 
 const scrollContainer = document.getElementById('scroll-container');
 const sections = document.querySelectorAll('.section');
