@@ -611,6 +611,28 @@ body {
   color: white;
 }
 
+.lightbox__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0.5rem 1rem;
+  user-select: none;
+}
+
+.lightbox__nav:hover {
+  color: white;
+}
+
+.lightbox__nav--prev { left: 1rem; }
+.lightbox__nav--next { right: 1rem; }
+
 .gallery-grid img {
   cursor: zoom-in;
 }

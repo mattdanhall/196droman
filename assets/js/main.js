@@ -58,15 +58,27 @@ cottageImg.addEventListener('click', () => fadeSwap(defaultCottageSrc));
 // ── Lightbox ─────────────────────────────────────────────────────────────────
 const lightbox = document.createElement('div');
 lightbox.className = 'lightbox';
-lightbox.innerHTML = '<img class="lightbox__img" src="" alt=""><button class="lightbox__close" aria-label="Close image">&#215;</button>';
+lightbox.innerHTML = `
+  <button class="lightbox__nav lightbox__nav--prev" aria-label="Previous image">&#8249;</button>
+  <img class="lightbox__img" src="" alt="">
+  <button class="lightbox__nav lightbox__nav--next" aria-label="Next image">&#8250;</button>
+  <button class="lightbox__close" aria-label="Close image">&#215;</button>
+`;
 document.body.appendChild(lightbox);
 
 const lightboxImg   = lightbox.querySelector('.lightbox__img');
 const lightboxClose = lightbox.querySelector('.lightbox__close');
+const lightboxPrev  = lightbox.querySelector('.lightbox__nav--prev');
+const lightboxNext  = lightbox.querySelector('.lightbox__nav--next');
 
-function openLightbox(src, alt) {
-  lightboxImg.src = src;
-  lightboxImg.alt = alt;
+const galleryImgs = [...document.querySelectorAll('.gallery-grid img')];
+let currentIndex = 0;
+
+function openLightbox(index) {
+  currentIndex = index;
+  const img = galleryImgs[index];
+  lightboxImg.src = img.src;
+  lightboxImg.alt = img.alt;
   lightbox.classList.add('is-open');
 }
 
@@ -74,13 +86,28 @@ function closeLightbox() {
   lightbox.classList.remove('is-open');
 }
 
-document.querySelectorAll('.gallery-grid img').forEach((img) => {
-  img.addEventListener('click', () => openLightbox(img.src, img.alt));
+function showPrev() {
+  openLightbox((currentIndex - 1 + galleryImgs.length) % galleryImgs.length);
+}
+
+function showNext() {
+  openLightbox((currentIndex + 1) % galleryImgs.length);
+}
+
+galleryImgs.forEach((img, i) => {
+  img.addEventListener('click', () => openLightbox(i));
 });
 
 lightbox.addEventListener('click', (e) => { if (e.target !== lightboxImg) closeLightbox(); });
+lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); showPrev(); });
+lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); showNext(); });
 lightboxClose.addEventListener('click', closeLightbox);
-document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+document.addEventListener('keydown', (e) => {
+  if (!lightbox.classList.contains('is-open')) return;
+  if (e.key === 'Escape')     closeLightbox();
+  if (e.key === 'ArrowLeft')  showPrev();
+  if (e.key === 'ArrowRight') showNext();
+});
 
 // ── Map ──────────────────────────────────────────────────────────────────────
 const DROMAN_LAT  = 58.485568;
