@@ -116,12 +116,12 @@ const marker = L.marker([DROMAN_LAT, DROMAN_LNG], { icon: markerIcon })
   .openPopup();
 
 // Recalculate map dimensions when the section becomes visible
-const findUsSection = document.getElementById('find-us');
-const findUsObserver = new IntersectionObserver(
+const locationSection = document.getElementById('location');
+const locationObserver = new IntersectionObserver(
   (entries) => {
     if (entries[0].isIntersecting) map.invalidateSize();
   },
   { root: scrollContainer, threshold: 0.5 }
 );
 
-findUsObserver.observe(findUsSection);
+locationObserver.observe(locationSection);
