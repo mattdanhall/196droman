@@ -39,6 +39,15 @@ body {
   overflow: hidden;
 }
 
+a {
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #fff;
+}
+
 /* =============================================================
    SCROLL CONTAINER
    ============================================================= */
@@ -383,15 +392,6 @@ body {
   line-height: 1.75;
 }
 
-.activity-card a {
-  color: rgba(255, 255, 255, 0.65);
-  text-decoration: none;
-}
-
-.activity-card a:hover {
-  color: #fff;
-}
-
 /* =============================================================
    GALLERY
    ============================================================= */
@@ -425,7 +425,7 @@ body {
    ============================================================= */
 
 .section--visit {
-  background: transparent;
+  background: var(--color-section-bg-alt);
 }
 
 .visit-grid {
@@ -503,8 +503,7 @@ body {
   margin-bottom: 2.5rem;
 }
 
-.find-us-directions h3,
-.visit-block h3 {
+.find-us-directions h3 {
   font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 400;
@@ -543,23 +542,6 @@ body {
   font-weight: 700;
   font-size: 1em;
   line-height: 1;
-}
-
-.contact-link {
-  display: inline-block;
-  margin-top: 0.75rem;
-  color: var(--color-text);
-  text-decoration: none;
-  font-size: 0.9rem;
-  letter-spacing: 0.05em;
-  border-bottom: 1px solid var(--color-accent);
-  padding-bottom: 2px;
-  transition: color 0.2s, border-color 0.2s;
-}
-
-.contact-link:hover {
-  color: var(--color-accent);
-  border-color: transparent;
 }
 
 /* =============================================================

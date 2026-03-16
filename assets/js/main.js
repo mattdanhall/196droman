@@ -1,7 +1,18 @@
 const heroVideo = document.querySelector('.hero-video');
-heroVideo.querySelector('source').src = `assets/video/hero_${Math.floor(Math.random() * 6)}.webm`;
+const heroSource = heroVideo.querySelector('source');
+const fullSrc = `assets/video/hero_${Math.floor(Math.random() * 6)}.webm`;
+
+heroSource.src = 'assets/video/hero_low.webm';
 heroVideo.load();
-heroVideo.playbackRate = 0.8;
+heroVideo.playbackRate = 0.7;
+
+const fullVideo = document.createElement('video');
+fullVideo.src = fullSrc;
+fullVideo.addEventListener('canplaythrough', () => {
+  heroSource.src = fullSrc;
+  heroVideo.load();
+  heroVideo.playbackRate = 0.8;
+}, { once: true });
 
 const scrollContainer = document.getElementById('scroll-container');
 const sections = document.querySelectorAll('.section');
