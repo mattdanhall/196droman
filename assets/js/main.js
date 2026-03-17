@@ -8,7 +8,7 @@ heroVideo.playbackRate = 0.7;
 
 const fullVideo = document.createElement('video');
 fullVideo.src = fullSrc;
-fullVideo.addEventListener('canplaythrough', () => {
+fullVideo.addEventListener('canplay', () => {
   heroSource.src = fullSrc;
   heroVideo.load();
   heroVideo.playbackRate = 0.8;
