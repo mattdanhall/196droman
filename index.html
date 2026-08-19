@@ -1,219 +1,510 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>196 Droman</title>
-  <meta name="description" content="196 Droman, a family cottage in the wilds of North West Scotland, on the coast of Sutherland.">
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400&display=swap" rel="stylesheet">
-  <!-- Preload cottage hover images so they're ready before interaction -->
-  <link rel="preload" as="image" href="assets/images/IMG_5271.webp" fetchpriority="low">
-  <link rel="preload" as="image" href="assets/images/IMG_5278.webp" fetchpriority="low">
-  <link rel="preload" as="image" href="assets/images/IMG_5282.webp" fetchpriority="low">
-  <link rel="preload" as="image" href="assets/images/IMG_5274.webp" fetchpriority="low">
-  <link rel="preload" as="image" href="assets/images/IMG_5260.webp" fetchpriority="low">
-  <link rel="preload" as="image" href="assets/images/IMG_5255.webp" fetchpriority="low">
-  <link rel="preload" as="image" href="assets/images/IMG_5267.webp" fetchpriority="low">
-  <link rel="preload" as="image" href="assets/images/IMG_5261.webp" fetchpriority="low">
-  <link rel="preload" as="image" href="assets/images/Droman0177.webp" fetchpriority="low">
-  <link rel="preload" as="image" href="assets/images/IMG_3030.webp" fetchpriority="low">
-  <link rel="preload" as="image" href="assets/images/IMG_5276.webp" fetchpriority="low">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>196 Droman</title>
+    <meta
+      name="description"
+      content="196 Droman, a family cottage in the wilds of North West Scotland, on the coast of Sutherland."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Inter:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css?v=4" />
+  </head>
+  <body>
+    <!-- Fixed video background — persists behind all sections -->
+    <video class="hero-video" autoplay muted loop playsinline preload="auto">
+      <source src="assets/video/hero_low.webm" type="video/webm" />
+    </video>
+    <div class="hero-overlay" aria-hidden="true"></div>
 
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
-  <link rel="stylesheet" href="assets/css/style.css?v=3">
-</head>
-<body>
+    <nav class="dot-nav" aria-label="Page sections">
+      <a href="#hero" class="dot" data-label="Home" aria-label="Home"></a>
+      <a
+        href="#cottage"
+        class="dot"
+        data-label="The Cottage"
+        aria-label="The Cottage"
+      ></a>
+      <a
+        href="#location"
+        class="dot"
+        data-label="Location"
+        aria-label="Location"
+      ></a>
+      <a
+        href="#activities"
+        class="dot"
+        data-label="Activities"
+        aria-label="Activities"
+      ></a>
+      <a
+        href="#gallery"
+        class="dot"
+        data-label="Gallery"
+        aria-label="Gallery"
+      ></a>
+      <a href="#stay" class="dot" data-label="Stay" aria-label="Stay"></a>
+    </nav>
 
-  <!-- Fixed video background — persists behind all sections -->
-  <video class="hero-video" autoplay muted loop playsinline>
-    <source src="" type="video/webm">
-  </video>
-  <div class="hero-overlay" aria-hidden="true"></div>
+    <main class="scroll-container" id="scroll-container">
+      <!-- ── Hero ─────────────────────────────────────────────────── -->
+      <section id="hero" class="section section--hero" aria-label="Welcome">
+        <h1 class="hero-title">196 Droman</h1>
+        <p class="hero-subtitle">
+          A family cottage, in the wilds of North West Scotland
+        </p>
+      </section>
 
-  <nav class="dot-nav" aria-label="Page sections">
-    <a href="#hero"       class="dot" data-label="Home"        aria-label="Home"></a>
-    <a href="#cottage"    class="dot" data-label="The Cottage" aria-label="The Cottage"></a>
-    <a href="#location"   class="dot" data-label="Location"    aria-label="Location"></a>
-    <a href="#activities" class="dot" data-label="Activities"  aria-label="Activities"></a>
-    <a href="#gallery"    class="dot" data-label="Gallery"     aria-label="Gallery"></a>
-    <a href="#visit"      class="dot" data-label="Visit"       aria-label="Visit"></a>
-  </nav>
-
-  <main class="scroll-container" id="scroll-container">
-
-    <!-- ── Hero ─────────────────────────────────────────────────── -->
-    <section id="hero" class="section section--hero" aria-label="Welcome">
-      <h1 class="hero-title">196 Droman</h1>
-      <p class="hero-subtitle">A family cottage, in the wilds of North West Scotland</p>
-    </section>
-
-    <!-- ── The Cottage ───────────────────────────────────────────── -->
-    <section id="cottage" class="section section--cottage" aria-labelledby="cottage-heading">
-      <div class="section-inner">
-        <header class="section-header">
-          <h2 id="cottage-heading" class="section-title">The Cottage</h2>
-          <p class="section-intro">196 Droman has been in the Ross/Anderson-Wallace family for more than 40 years, and has long been a refuge for tired souls seeking peace, beautiful scenery and magically fresh air. It is a much loved family home, very comfortable and well loved, but slightly faded around the edges, and it is extremely well adapted to take account of the vagaries of the Scottish weather.</p>
-        </header>
-        <figure class="cottage-photo">
-          <img src="assets/images/IMG_0966.webp" alt="196 Droman seen from across the way">
-          <figcaption>Cottage on the right</figcaption>
-        </figure>
-        <div class="feature-grid">
-          <div class="feature-card">
-            <h3>Downstairs</h3>
-            <ul>
-              <li data-image="IMG_5271.webp">Living room with open fireplace</li>
-              <li data-image="IMG_5278.webp">Kitchen &amp; dining table (seats 6–8)</li>
-              <li data-image="IMG_5282.webp">Enclosed sun porch</li>
-              <li data-image="IMG_5279.webp">Cloakroom &amp; loo</li>
-            </ul>
-          </div>
-          <div class="feature-card">
-            <h3>Upstairs</h3>
-            <ul>
-              <li data-image="IMG_5267.webp">King bedroom</li>
-              <li data-image="IMG_5255.webp">Twin bedroom</li>
-              <li data-image="IMG_5260.webp">Large bedroom &amp; dayroom with king bed</li>
-              <li data-image="IMG_5261.webp">Bathroom with bath &amp; electric shower</li>
-            </ul>
-          </div>
-          <div class="feature-card">
-            <h3>Outside</h3>
-            <ul>
-              <li data-image="Droman0177.webp">Two parking spaces</li>
-              <li data-image="IMG_5274.webp">Utility room &amp; laundry facilities</li>
-              <li data-image="IMG_3030.webp">Open grounds &amp; washing line</li>
-              <li data-image="IMG_5276.webp">Store with games &amp; beach gear</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── Location ──────────────────────────────────────────────── -->
-    <section id="location" class="section section--location" aria-labelledby="location-heading">
-      <div class="location-layout">
-        <div class="find-us-map" id="map" aria-label="Map showing location of 196 Droman"></div>
-        <div class="location-panel">
+      <!-- ── The Cottage ───────────────────────────────────────────── -->
+      <section id="cottage" class="section" aria-labelledby="cottage-heading">
+        <div class="section-inner">
           <header class="section-header">
-            <h2 id="location-heading" class="section-title">The Location</h2>
-            <p class="section-intro section-intro--pull">"As far north-west as you can get on this island — you really can't get much further away from it all."</p>
+            <h2 id="cottage-heading" class="section-title">The Cottage</h2>
+            <p class="section-intro">
+              196 Droman has been in the Ross/Anderson-Wallace family for more
+              than 40 years, and has long been a refuge for tired souls seeking
+              peace, beautiful scenery and magically fresh air.
+            </p>
           </header>
-          <div class="location-body">
-            <p>Droman is a small hamlet on Scotland's north-western coast, near Kinlochbervie in Sutherland. A rocky bay and pier are a two-minute walk from the door; sandy beaches are five minutes across the hills.</p>
-            <p>The wider landscape is moorlands, lochans, and bare rocky mountains. Northwest Sutherland is one of the most sparsely populated and hauntingly beautiful places in Britain.</p>
-          </div>
-          <div class="find-us-directions">
-            <h3>Getting Here</h3>
-            <p>Take the A894 to Kinlochbervie, then follow signs for Balchrick. Turn left towards Droman pier and the blue and white cottage is down the hill next to the track. You're as far north-west as it gets</p>
-            <a class="w3w-link" href="https://what3words.com/pleaser.bandaged.skis" target="_blank" rel="noopener" aria-label="what3words location">
-              <span class="w3w-logo" aria-hidden="true">///</span>pleaser.bandaged.skis
-            </a>
+          <p>
+            It isn't a polished holiday cottage and we don't pretend that it is.
+            It is practical, warm, comfortable and well equipped for whatever
+            the north-west Scottish weather decides to throw at it - a place
+            where you can properly settle in. What it offers is something
+            increasingly difficult to find: a simple, extended crofters cottage
+            in an extraordinary place, with the sea at the bottom of the road,
+            beaches over the hill and a great deal of North-West Scotland
+            outside the front door. There's a comfortable sitting room, a
+            well-equipped kitchen and everything you need for having a wonderful
+            break - whatever the weather. There are plenty of books and games
+            for rainy days and evenings in front of the fire, and everything you
+            need to enjoy the "midnight sun" on the beach in the summer.
+          </p>
+          <figure class="cottage-photo">
+            <img
+              src="assets/images/IMG_0966.webp"
+              alt="196 Droman seen from across the way"
+            />
+            <figcaption>Cottage on the right</figcaption>
+          </figure>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <h3>Downstairs</h3>
+              <ul>
+                <li>
+                  <button type="button" data-image="IMG_5271.webp">
+                    Living room with open fireplace
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-image="IMG_5278.webp">
+                    Kitchen &amp; dining table (seats 6–8)
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-image="IMG_5282.webp">
+                    Enclosed sun porch
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-image="IMG_5279.webp">
+                    Cloakroom &amp; loo
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div class="feature-card">
+              <h3>Upstairs</h3>
+              <ul>
+                <li>
+                  <button type="button" data-image="IMG_5267.webp">
+                    King bedroom
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-image="IMG_5255.webp">
+                    Twin bedroom
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-image="IMG_5260.webp">
+                    Large bedroom &amp; dayroom with king bed
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-image="IMG_5261.webp">
+                    Bathroom with bath &amp; electric shower
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div class="feature-card">
+              <h3>Outside</h3>
+              <ul>
+                <li>
+                  <button type="button" data-image="Droman0177.webp">
+                    Two parking spaces
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-image="IMG_5274.webp">
+                    Utility room &amp; laundry facilities
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-image="IMG_3030.webp">
+                    Open grounds &amp; washing line
+                  </button>
+                </li>
+                <li>
+                  <button type="button" data-image="IMG_5276.webp">
+                    Store with games &amp; beach gear
+                  </button>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ── Activities ────────────────────────────────────────────── -->
-    <section id="activities" class="section section--activities" aria-labelledby="activities-heading">
-      <div class="section-inner">
-        <header class="section-header">
-          <h2 id="activities-heading" class="section-title">Activities</h2>
-          <p class="section-intro">The area rewards those who love the outdoors, from mountain walks and sea-bird watching to sandy beaches and fresh seafood.</p>
-        </header>
-        <div class="activity-grid">
-          <div class="activity-card">
-            <h3>Beaches</h3>
-            <p>Polin beach is a short walk from the door. Droman Bay is a charming rocky cove at the end of the road. Oldshoremore and Sheigra can be reached on foot or by road. Remote Sandwood Bay is an 8-mile round trip and stunningly beautiful.</p>
-          </div>
-          <div class="activity-card">
-            <h3>Walking &amp; Climbing</h3>
-            <p>Ben Stack, Arkle and Foinaven rise from the moorland nearby. Foinaven is the most challenging, mostly because of the trek to reach its base. <a href="https://www.walkhighlands.co.uk/sutherland/" target="_blank" rel="noopener">Walk Highlands</a> has good route guides.</p>
-          </div>
-          <div class="activity-card">
-            <h3>Fishing</h3>
-            <p>Sea fishing requires no permit. For loch, river and fly fishing, permits are available through the <a href="https://www.kinlochbervie.info/durness-and-klb-angling-club" target="_blank" rel="noopener">Durness &amp; KLB Angling Club</a>. Sea-angling equipment is in the workshop.</p>
-          </div>
-          <div class="activity-card">
-            <h3>Handa Island</h3>
-            <p>A Scottish Wildlife Trust reserve home to over 100,000 breeding seabirds - guillemots, razorbills, puffins, great skuas and more. Seasonal ferry from Tarbert; 3.5-mile circular walk around the island.</p>
-          </div>
-          <div class="activity-card">
-            <h3>Durness &amp; Balnakeil</h3>
-            <p>Smoo Cave, one of the largest cave entrances in Britain, is just east of Durness. Balnakeil Craft Village has workshops, a gallery and the excellent Cocoa Mountain chocolate shop. The Faraid Head walk (approx. 5 miles) offers whale, dolphin and otter sightings.</p>
-          </div>
-          <div class="activity-card">
-            <h3>Lotte Glob</h3>
-            <p>Renowned ceramic artist with a wonderful croft garden and sculptures on the road along Loch Eribol out of Durness. <a href="https://lotteglob.co.uk/" target="_blank" rel="noopener">Book a visit in advance.</a></p>
-          </div>
-          <div class="activity-card">
-            <h3>Kylesku</h3>
-            <p>Seasonal boat trips from Kylesku to Eas a Chual Aluinn, Britain's tallest waterfall at 200m. Also a chance to see seals and sea eagles.</p>
-          </div>
-          <div class="activity-card">
-            <h3>Eating Out</h3>
-            <p>The Quay House in Kinlochbervie harbour is recommended for coffee and lunch. Loch Clash Larder (a van past London Stores) serves fresh local seafood April–October. Further afield: the Crofter's Kitchen in Scourie and the Shorehouse Seafood Restaurant in Tarbert.</p>
+      <!-- ── Location ──────────────────────────────────────────────── -->
+      <section id="location" class="section" aria-labelledby="location-heading">
+        <div class="location-layout">
+          <div
+            class="find-us-map"
+            id="map"
+            aria-label="Map showing location of 196 Droman"
+          ></div>
+          <div class="location-panel">
+            <header class="section-header">
+              <h2 id="location-heading" class="section-title">The Location</h2>
+              <p class="section-intro">
+                "As far north-west as you can get on this island — you really
+                can't get much further away from it all."
+              </p>
+            </header>
+            <p>
+              Droman is a small hamlet on Scotland's north-western coast, near
+              Kinlochbervie in Sutherland. A rocky bay and pier are a two-minute
+              walk from the door; sandy beaches are five minutes across the
+              hills.
+            </p>
+            <p>
+              The wider landscape is moorlands, lochans, and bare rocky
+              mountains. Northwest Sutherland is one of the most sparsely
+              populated and hauntingly beautiful places in Britain.
+            </p>
+            <div class="find-us-directions">
+              <h3 id="getting-here">Getting Here</h3>
+              <p>
+                Take the A894 to Kinlochbervie, then follow signs for Balchrick.
+                Turn left towards Droman pier and the blue and white cottage is
+                down the hill next to the track. You're as far north-west as it
+                gets.
+              </p>
+              <a
+                class="w3w-link"
+                href="https://what3words.com/pleaser.bandaged.skis"
+                target="_blank"
+                rel="noopener"
+                aria-label="what3words location"
+              >
+                <span class="w3w-logo" aria-hidden="true">///</span
+                >pleaser.bandaged.skis
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ── Gallery ───────────────────────────────────────────────── -->
-    <section id="gallery" class="section section--gallery" aria-labelledby="gallery-heading">
-      <div class="section-inner">
-        <header class="section-header">
-          <h2 id="gallery-heading" class="section-title">Gallery</h2>
-        </header>
-        <div class="gallery-grid">
-          <img src="assets/images/IMG_4934.webp" alt="196 Droman">
-          <img src="assets/images/IMG_2835.webp" alt="196 Droman">
-          <img src="assets/images/IMG_3052.webp" alt="196 Droman">
-          <img src="assets/images/IMG_7913.webp" alt="196 Droman">
-          <img src="assets/images/IMG_4942.webp" alt="196 Droman">
-          <img src="assets/images/IMG_1516.webp" alt="196 Droman">
-          <img src="assets/images/IMG_1899.webp"  alt="196 Droman">
-          <img src="assets/images/IMG_1680.webp" alt="196 Droman">
-          <img src="assets/images/IMG_7810.webp" alt="196 Droman">
-          <img src="assets/images/IMG_0947.webp" alt="196 Droman">
-          <img src="assets/images/IMG_0930.webp" alt="196 Droman">
-          <img src="assets/images/IMG_0966.webp" alt="196 Droman">
-          <img src="assets/images/IMG_20210814_115326_Original.webp" alt="196 Droman">
-          <img src="assets/images/IMG_3080.webp" alt="196 Droman">
-          <img src="assets/images/IMG_2871.webp"  alt="196 Droman">
-          <img src="assets/images/IMG_1512.webp" alt="196 Droman">
-          <img src="assets/images/IMG_7917.webp" alt="196 Droman">
-          <img src="assets/images/IMG_7930.webp" alt="196 Droman">
-          <img src="assets/images/IMG_4977.webp" alt="196 Droman">
-          <img src="assets/images/IMG_4982.webp" alt="196 Droman">
-          <img src="assets/images/IMG_2836.webp" alt="196 Droman">
+      <!-- ── Activities ────────────────────────────────────────────── -->
+      <section
+        id="activities"
+        class="section"
+        aria-labelledby="activities-heading"
+      >
+        <div class="section-inner">
+          <header class="section-header">
+            <h2 id="activities-heading" class="section-title">Activities</h2>
+            <p class="section-intro">
+              The area rewards those who love the outdoors, from mountain walks
+              and sea-bird watching to sandy beaches and fresh seafood.
+            </p>
+          </header>
+          <div class="activity-grid">
+            <div class="activity-card">
+              <h3>Beaches</h3>
+              <p>
+                Polin beach is a short walk from the door. Droman Bay is a
+                charming rocky cove at the end of the road. Oldshoremore and
+                Sheigra can be reached on foot or by road. Remote Sandwood Bay
+                is an 8-mile round trip and stunningly beautiful.
+              </p>
+            </div>
+            <div class="activity-card">
+              <h3>Walking &amp; Climbing</h3>
+              <p>
+                Ben Stack, Arkle and Foinaven rise from the moorland nearby.
+                Foinaven is the most challenging, mostly because of the trek to
+                reach its base.
+                <a
+                  href="https://www.walkhighlands.co.uk/sutherland/"
+                  target="_blank"
+                  rel="noopener"
+                  >Walk Highlands</a
+                >
+                has good route guides.
+              </p>
+            </div>
+            <div class="activity-card">
+              <h3>Fishing</h3>
+              <p>
+                Sea fishing requires no permit. For loch, river and fly fishing,
+                permits are available through the
+                <a
+                  href="https://www.kinlochbervie.info/durness-and-klb-angling-club"
+                  target="_blank"
+                  rel="noopener"
+                  >Durness &amp; KLB Angling Club</a
+                >. Sea-angling equipment is in the workshop.
+              </p>
+            </div>
+            <div class="activity-card">
+              <h3>Handa Island</h3>
+              <p>
+                A Scottish Wildlife Trust reserve home to over 100,000 breeding
+                seabirds - guillemots, razorbills, puffins, great skuas and
+                more. Seasonal ferry from Tarbet; 3.5-mile circular walk around
+                the island.
+              </p>
+            </div>
+            <div class="activity-card">
+              <h3>Durness &amp; Balnakeil</h3>
+              <p>
+                Smoo Cave, one of the largest cave entrances in Britain, is just
+                east of Durness. Balnakeil Craft Village has workshops, a
+                gallery and the excellent Cocoa Mountain chocolate shop. The
+                Faraid Head walk (approx. 5 miles) offers whale, dolphin and
+                otter sightings.
+              </p>
+            </div>
+            <div class="activity-card">
+              <h3>Lotte Glob</h3>
+              <p>
+                Renowned ceramic artist with a wonderful croft garden and
+                sculptures on the road along Loch Eribol out of Durness.
+                <a
+                  href="https://lotteglob.co.uk/"
+                  target="_blank"
+                  rel="noopener"
+                  >Book a visit in advance.</a
+                >
+              </p>
+            </div>
+            <div class="activity-card">
+              <h3>Kylesku</h3>
+              <p>
+                Seasonal boat trips from Kylesku to Eas a Chual Aluinn,
+                Britain's tallest waterfall at 200m. Also a chance to see seals
+                and sea eagles.
+              </p>
+            </div>
+            <div class="activity-card">
+              <h3>Eating Out</h3>
+              <p>
+                The Quay House in Kinlochbervie harbour is recommended for
+                coffee and lunch. Loch Clash Larder (a van past London Stores)
+                serves fresh local seafood April–October. Further afield: the
+                Crofter's Kitchen in Scourie and the Shorehouse Seafood
+                Restaurant in Tarbet.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- ── Visit ────────────────────────────────────────────────── -->
-    <section id="visit" class="section section--visit" aria-labelledby="visit-heading">
-      <div class="section-inner">
-        <header class="section-header">
-          <h2 id="visit-heading" class="section-title">Visit</h2>
-        </header>
-        <p>Please use the calendar below to check availability and submit a booking request</p>
-        <br>
-        <div class="visit-block">
+      <!-- ── Gallery ───────────────────────────────────────────────── -->
+      <section id="gallery" class="section" aria-labelledby="gallery-heading">
+        <div class="section-inner">
+          <header class="section-header">
+            <h2 id="gallery-heading" class="section-title">Gallery</h2>
+          </header>
+          <div class="gallery-grid">
+            <img
+              src="assets/images/IMG_4934.webp"
+              alt="196 Droman gallery photograph 1"
+            />
+            <img
+              src="assets/images/IMG_2835.webp"
+              alt="196 Droman gallery photograph 2"
+            />
+            <img
+              src="assets/images/IMG_3052.webp"
+              alt="196 Droman gallery photograph 3"
+            />
+            <img
+              src="assets/images/IMG_7913.webp"
+              alt="196 Droman gallery photograph 4"
+            />
+            <img
+              src="assets/images/IMG_4942.webp"
+              alt="196 Droman gallery photograph 5"
+            />
+            <img
+              src="assets/images/IMG_1516.webp"
+              alt="196 Droman gallery photograph 6"
+            />
+            <img
+              src="assets/images/IMG_1899.webp"
+              alt="196 Droman gallery photograph 7"
+            />
+            <img
+              src="assets/images/IMG_1680.webp"
+              alt="196 Droman gallery photograph 8"
+            />
+            <img
+              src="assets/images/IMG_7810.webp"
+              alt="196 Droman gallery photograph 9"
+            />
+            <img
+              src="assets/images/IMG_0947.webp"
+              alt="196 Droman gallery photograph 10"
+            />
+            <img
+              src="assets/images/IMG_0930.webp"
+              alt="196 Droman gallery photograph 11"
+            />
+            <img
+              src="assets/images/IMG_0966.webp"
+              alt="196 Droman gallery photograph 12"
+            />
+            <img
+              src="assets/images/IMG_20210814_115326_Original.webp"
+              alt="196 Droman gallery photograph 13"
+            />
+            <img
+              src="assets/images/IMG_3080.webp"
+              alt="196 Droman gallery photograph 14"
+            />
+            <img
+              src="assets/images/IMG_2871.webp"
+              alt="196 Droman gallery photograph 15"
+            />
+            <img
+              src="assets/images/IMG_1512.webp"
+              alt="196 Droman gallery photograph 16"
+            />
+            <img
+              src="assets/images/IMG_7917.webp"
+              alt="196 Droman gallery photograph 17"
+            />
+            <img
+              src="assets/images/IMG_7930.webp"
+              alt="196 Droman gallery photograph 18"
+            />
+            <img
+              src="assets/images/IMG_4977.webp"
+              alt="196 Droman gallery photograph 19"
+            />
+            <img
+              src="assets/images/IMG_4982.webp"
+              alt="196 Droman gallery photograph 20"
+            />
+            <img
+              src="assets/images/IMG_2836.webp"
+              alt="196 Droman gallery photograph 21"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Stay -────────────────────────────────────────────────── -->
+      <section id="stay" class="section" aria-labelledby="stay-heading">
+        <div class="section-inner">
+          <header class="section-header">
+            <h2 id="stay-heading" class="section-title">Stay</h2>
+            <p class="section-intro">
+              196 Droman is our family home, but when we're not using it
+              ourselves it is available for others to enjoy at any time of year.
+            </p>
+          </header>
+          <p>
+            We are licensed by Highland Council for short term letting (licence
+            number XXXXX) for up to six people in three bedrooms. You can find
+            out more about the house, what's provided and what to expect in the
+            <a href="#cottage">Cottage section</a>.
+          </p>
+          <p>
+            Prices vary according to the time of year and the length of your
+            stay. Our booking calendar shows what's currently available and the
+            price for the dates you're considering. Stays are normally Saturday
+            to Saturday, but we are very happy to accommodate adaptations to
+            that where possible. All bookings will be initially marked as
+            "pending". Please wait for confirmation from us BEFORE making any
+            other arrangements.
+          </p>
+          <p>
+            Cleaning & a linen change fee of £100 will be added to each booking.
+          </p>
+          <h3 class="content-heading">Before you book</h3>
+          <p>
+            Part of Droman's appeal is its location, but that also means it's
+            worth knowing what you're coming to. This is the far north-west of
+            Scotland. The weather can be glorious & wild - looking green in the
+            and same afternoon. Shops, restaurants and other facilities aren't
+            on the doorstep, and getting here takes a little effort.
+          </p>
+          <p>That's rather the point.</p>
+          <p>
+            Have a look through the <a href="#location">Location</a> and
+            <a href="#location">Getting Here</a> sections before you book.
+            They'll give you a much better idea of where 196 Droman is, what
+            there is to do and what staying here is actually like.
+          </p>
+          <h3 class="content-heading">A few practical things</h3>
+          <p>
+            196 accommodates a maximum of six people. Stays are subject to
+            availability and our minimum-stay requirements, which can vary
+            through the year. The current price, availability and any minimum
+            stay for your chosen dates are shown on the booking calendar.
+          </p>
+          <h3 class="content-heading">Questions?</h3>
+          <p>
+            Or you're wondering whether Droman will suit you, please get in
+            touch. We're very happy to answer questions about the house, the
+            journey or the area. We'd much rather you knew what to expect before
+            coming — and arrived looking forward to exactly the sort of place
+            196 is.
+          </p>
+          <h3 class="content-heading">Tariff</h3>
+          <p>
+            £450 - Low (October to March) £550 - Shoulder (April, May and
+            September) £650 - High (June, July, August, September) All plus
+            cleaning at fee to £100. Half terms, school holidays & Xmas, NY are
+            all classed as "High Season"
+          </p>
           <script src="https://www.bookingmood.com/js/resize.js"></script>
           <iframe
+            class="booking-calendar"
             src="https://www.bookingmood.com/embed/f74a95f3-be1d-43a6-b83d-9e169e5e31a8?"
-            style="width:100%;border:none"
+            title="196 Droman availability and booking calendar"
           ></iframe>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
 
-  </main>
-
-  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="assets/js/main.js?v=2"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="assets/js/main.js?v=3"></script>
+  </body>
 </html>

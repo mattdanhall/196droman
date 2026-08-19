@@ -2,24 +2,25 @@
    RESET & CUSTOM PROPERTIES
    ============================================================= */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 :root {
-  --color-bg:         #0d1117;
-  --color-bg-alt:     #111820;
-  --color-section-bg:     rgba(13, 17, 23, 0.82);
+  --color-bg: #0d1117;
+  --color-section-bg: rgba(13, 17, 23, 0.82);
   --color-section-bg-alt: rgba(17, 24, 32, 0.82);
-  --color-text:       #e6e2db;
+  --color-text: #e6e2db;
   --color-text-muted: #8a8680;
-  --color-accent:     #6d9ea0;
-  --color-border:     rgba(255, 255, 255, 0.08);
+  --color-accent: #6d9ea0;
+  --color-border: rgba(255, 255, 255, 0.08);
 
-  --font-display: 'Cormorant Garamond', Georgia, serif;
-  --font-body:    'Inter', system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
 
   --section-pad: clamp(3rem, 8vh, 6rem) clamp(1.5rem, 6vw, 6rem);
 }
@@ -31,10 +32,11 @@ html {
 
 body {
   background: var(--color-bg);
-  color: var(--color-text);
+  color: var(--color-text-muted);
   font-family: var(--font-body);
+  font-size: 0.95rem;
   font-weight: 300;
-  line-height: 1.7;
+  line-height: 1.8;
   height: 100dvh;
   overflow: hidden;
 }
@@ -42,6 +44,7 @@ body {
 a {
   color: rgba(255, 255, 255, 0.65);
   text-decoration: none;
+  transition: color 0.2s;
 }
 
 a:hover {
@@ -66,7 +69,7 @@ a:hover {
 }
 
 /* =============================================================
-   SECTIONS — BASE
+   SECTIONS — BASE & UNIFIED STYLING
    ============================================================= */
 
 .section {
@@ -77,6 +80,12 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--color-section-bg);
+}
+
+/* Automatic alternating section backgrounds */
+.section:nth-of-type(even) {
+  background: var(--color-section-bg-alt);
 }
 
 .section-inner {
@@ -99,8 +108,22 @@ a:hover {
 }
 
 .section-intro {
-  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-  color: var(--color-text-muted);
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+h3 {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 0.875rem;
 }
 
 /* =============================================================
@@ -125,7 +148,10 @@ a:hover {
   border-radius: 50%;
   background: transparent;
   border: 1.5px solid rgba(255, 255, 255, 0.45);
-  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+  transition:
+    background 0.3s,
+    border-color 0.3s,
+    transform 0.3s;
   position: relative;
 }
 
@@ -160,7 +186,7 @@ a:hover {
 }
 
 /* =============================================================
-   HERO VIDEO — fixed behind everything
+   HERO VIDEO & OVERLAY
    ============================================================= */
 
 .hero-video {
@@ -178,17 +204,13 @@ a:hover {
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.15) 0%,
-    rgba(0, 0, 0, 0.40) 55%,
+    rgba(0, 0, 0, 0.4) 55%,
     rgba(0, 0, 0, 0.65) 100%
   );
   z-index: -1;
 }
 
-/* =============================================================
-   HERO SECTION
-   ============================================================= */
-
-.section--hero {
+.section.section--hero {
   background: transparent;
 }
 
@@ -218,22 +240,14 @@ a:hover {
   font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
+  line-height: 1.7;
 }
 
 /* =============================================================
-   THE COTTAGE
+   CONTENT COMPONENTS
    ============================================================= */
 
-.section--cottage {
-  background: var(--color-section-bg);
-  align-items: flex-start;
-}
-
-.section--cottage .section-inner {
-  padding-top: clamp(3rem, 8vh, 6rem);
-  padding-bottom: clamp(3rem, 8vh, 6rem);
-}
-
+/* Cottage / Photos */
 .cottage-photo {
   margin-bottom: 2rem;
 }
@@ -255,9 +269,11 @@ a:hover {
   font-style: italic;
 }
 
-.feature-grid {
+/* Grids */
+.feature-grid,
+.activity-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
 }
 
@@ -266,103 +282,34 @@ a:hover {
   padding-top: 1.5rem;
 }
 
-.feature-card h3 {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  margin-bottom: 1rem;
-}
-
 .feature-card ul {
   list-style: none;
 }
 
 .feature-card li {
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
-  padding: 0.4rem 0;
   border-bottom: 1px solid var(--color-border);
-  transition: color 0.2s;
 }
 
-.feature-card li[data-image] {
+.feature-card button {
+  width: 100%;
+  padding: 0.4rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-muted);
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  transition: color 0.2s;
   cursor: pointer;
 }
 
-.feature-card li[data-image]:hover {
+.feature-card button:hover,
+.feature-card button:focus-visible {
   color: var(--color-text);
 }
 
 .feature-card li:last-child {
   border-bottom: none;
-}
-
-/* =============================================================
-   LOCATION
-   ============================================================= */
-
-.section--location {
-  background: var(--color-section-bg-alt);
-  align-items: stretch;
-  padding: 0;
-}
-
-.location-layout {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  width: 100%;
-  height: 100dvh;
-}
-
-.location-panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: var(--section-pad);
-  max-width: 560px;
-}
-
-.location-panel .section-header {
-  margin-bottom: clamp(1.5rem, 4vh, 3rem);
-}
-
-.section-intro--pull {
-  font-family: var(--font-display);
-  font-size: clamp(1.1rem, 2vw, 1.45rem);
-  font-weight: 300;
-  font-style: italic;
-  color: var(--color-text);
-  max-width: 48ch;
-}
-
-.location-body {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.location-body p {
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
-  line-height: 1.85;
-}
-
-/* =============================================================
-   ACTIVITIES
-   ============================================================= */
-
-.section--activities {
-  background: var(--color-section-bg);
-}
-
-.activity-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
 }
 
 .activity-card {
@@ -376,31 +323,55 @@ a:hover {
   background: rgba(255, 255, 255, 0.05);
 }
 
-.activity-card h3 {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  margin-bottom: 0.75rem;
+.location-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+  height: 100dvh;
+  max-height: 100dvh; /* Enforce viewport ceiling */
+  overflow: hidden;
 }
 
-.activity-card p {
-  font-size: 0.9rem;
-  color: var(--color-text-muted);
-  line-height: 1.75;
+.location-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.5rem, 4vh, 3rem) clamp(1.5rem, 6vw, 6rem); /* Reduced vertical clamp */
+  max-width: 560px;
+  overflow: hidden; /* Prevents trailing margin from triggering scrollbars */
 }
 
-/* =============================================================
-   GALLERY
-   ============================================================= */
-
-.section--gallery {
-  background: var(--color-section-bg-alt);
-  align-items: flex-start;
+.location-panel .section-header {
+  margin-bottom: clamp(1.5rem, 4vh, 3rem);
 }
 
+.location-panel > *:last-child,
+.find-us-directions:last-child {
+  margin-bottom: 0;
+}
+
+.section-inner > p + p,
+.location-panel > p + p {
+  margin-top: 1rem;
+}
+
+.section-inner > p + .cottage-photo,
+.location-panel > p + .find-us-directions {
+  margin-top: 2rem;
+}
+
+.booking-calendar {
+  width: 100%;
+  border: 0;
+  display: block;
+  margin-top: 2rem;
+}
+
+.content-heading {
+  margin-top: clamp(2rem, 5vh, 3.5rem);
+}
+
+/* Gallery */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -408,38 +379,20 @@ a:hover {
   gap: 0.4rem;
 }
 
-.gallery-placeholder {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px dashed var(--color-border);
-}
-
 .gallery-grid img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  cursor: zoom-in;
 }
 
-/* =============================================================
-   VISIT
-   ============================================================= */
-
-.section--visit {
-  background: var(--color-section-bg-alt);
-}
-
-.visit-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 2.5rem;
-}
-
-/* Map lives in the Location section; Leaflet requires a concrete height */
+/* Map & Leaflet Customization */
 .find-us-map {
   height: 100%;
+  min-height: 0;
 }
 
-/* Custom marker */
 .map-marker__dot {
   width: 12px;
   height: 12px;
@@ -449,7 +402,6 @@ a:hover {
   box-shadow: 0 0 0 4px rgba(109, 158, 160, 0.3);
 }
 
-/* Popup */
 .leaflet-popup-content-wrapper.map-popup,
 .map-popup .leaflet-popup-content-wrapper {
   background: rgba(13, 17, 23, 0.95);
@@ -473,7 +425,6 @@ a:hover {
   color: var(--color-accent);
 }
 
-/* Override Leaflet's default light UI to suit the dark theme */
 .find-us-map .leaflet-tile-pane {
   filter: brightness(0.9);
 }
@@ -498,37 +449,17 @@ a:hover {
   background: rgba(40, 50, 65, 0.95);
 }
 
-.find-us-directions,
-.visit-block {
+.find-us-directions {
   margin-bottom: 2.5rem;
 }
 
-.find-us-directions h3 {
-  font-family: var(--font-body);
-  font-size: 0.7rem;
-  font-weight: 400;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--color-accent);
-  margin-bottom: 0.875rem;
-}
-
-.find-us-directions p,
-.visit-block p {
-  font-size: 0.95rem;
-  color: var(--color-text-muted);
-  line-height: 1.85;
-  margin-bottom: 0.5rem;
-}
-
-/* what3words link */
+/* Links */
 .w3w-link {
   display: inline-flex;
   align-items: center;
   gap: 0.1em;
   margin-top: 0.875rem;
   color: var(--color-text-muted);
-  text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.2s;
 }
@@ -538,7 +469,7 @@ a:hover {
 }
 
 .w3w-logo {
-  color: #e11f26; /* what3words brand red */
+  color: #e11f26;
   font-weight: 700;
   font-size: 1em;
   line-height: 1;
@@ -575,48 +506,42 @@ a:hover {
   box-shadow: 0 8px 60px rgba(0, 0, 0, 0.6);
 }
 
-.lightbox__close {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.5rem;
-  background: transparent;
-  border: none;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 2rem;
-  line-height: 1;
-  cursor: pointer;
-  transition: color 0.2s;
-  padding: 0.25rem;
-}
-
-.lightbox__close:hover {
-  color: white;
-}
-
+.lightbox__close,
 .lightbox__nav {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   background: transparent;
   border: none;
   color: rgba(255, 255, 255, 0.7);
-  font-size: 4rem;
   line-height: 1;
   cursor: pointer;
   transition: color 0.2s;
-  padding: 0.5rem 1rem;
   user-select: none;
 }
 
-.lightbox__nav:hover {
-  color: white;
+.lightbox__close {
+  top: 1.25rem;
+  right: 1.5rem;
+  font-size: 2rem;
+  padding: 0.25rem;
 }
 
-.lightbox__nav--prev { left: 1rem; }
-.lightbox__nav--next { right: 1rem; }
+.lightbox__nav {
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 4rem;
+  padding: 0.5rem 1rem;
+}
 
-.gallery-grid img {
-  cursor: zoom-in;
+.lightbox__close:hover,
+.lightbox__nav:hover {
+  color: #fff;
+}
+
+.lightbox__nav--prev {
+  left: 1rem;
+}
+.lightbox__nav--next {
+  right: 1rem;
 }
 
 /* =============================================================
@@ -629,12 +554,10 @@ a:hover {
     gap: 0.7rem;
   }
 
-  /* Labels take too much space on narrow screens */
   .dot::after {
     display: none;
   }
 
-  /* Stack map above panel on mobile */
   .location-layout {
     grid-template-columns: 1fr;
     grid-template-rows: 45dvh 1fr;
@@ -656,10 +579,7 @@ a:hover {
 }
 
 @media (max-width: 480px) {
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
-
+  .gallery-grid,
   .feature-grid,
   .activity-grid {
     grid-template-columns: 1fr;

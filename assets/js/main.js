@@ -2,17 +2,32 @@ const heroVideo = document.querySelector('.hero-video');
 const heroSource = heroVideo.querySelector('source');
 const fullSrc = `assets/video/hero_${Math.floor(Math.random() * 6)}.webm`;
 
-heroSource.src = 'assets/video/hero_low.webm';
-heroVideo.load();
 heroVideo.playbackRate = 0.7;
 
-const fullVideo = document.createElement('video');
-fullVideo.src = fullSrc;
-fullVideo.addEventListener('canplay', () => {
-  heroSource.src = fullSrc;
-  heroVideo.load();
-  heroVideo.playbackRate = 0.8;
-}, { once: true });
+function loadFullVideo() {
+  const fullVideo = document.createElement('video');
+  fullVideo.preload = 'auto';
+  fullVideo.src = fullSrc;
+
+  fullVideo.addEventListener(
+    'canplay',
+    () => {
+      heroSource.src = fullSrc;
+      heroVideo.load();
+      heroVideo.playbackRate = 0.8;
+      heroVideo.play().catch(() => {});
+    },
+    { once: true }
+  );
+
+  fullVideo.load();
+}
+
+if (heroVideo.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) {
+  loadFullVideo();
+} else {
+  heroVideo.addEventListener('canplay', loadFullVideo, { once: true });
+}
 
 const scrollContainer = document.getElementById('scroll-container');
 const sections = document.querySelectorAll('.section');
@@ -48,6 +63,19 @@ dots.forEach((dot) => {
 const cottageImg        = document.querySelector('.cottage-photo img');
 const cottageCaption    = document.querySelector('.cottage-photo figcaption');
 const defaultCottageSrc = 'assets/images/IMG_0966.webp';
+const featureGrid       = document.querySelector('.feature-grid');
+const featureButtons    = [...document.querySelectorAll('.feature-card button[data-image]')];
+let cottageImagesPreloaded = false;
+
+function preloadCottageImages() {
+  if (cottageImagesPreloaded) return;
+
+  cottageImagesPreloaded = true;
+  featureButtons.forEach((button) => {
+    const image = new Image();
+    image.src = `assets/images/${button.dataset.image}`;
+  });
+}
 
 function fadeSwap(src) {
   cottageImg.style.opacity = '0';
@@ -58,12 +86,16 @@ function fadeSwap(src) {
   }, 200);
 }
 
-document.querySelectorAll('.feature-card li[data-image]').forEach((li) => {
-  li.addEventListener('mouseenter', () => fadeSwap(`assets/images/${li.dataset.image}`));
-  li.addEventListener('click',      () => fadeSwap(`assets/images/${li.dataset.image}`));
+featureButtons.forEach((button) => {
+  const imageSrc = `assets/images/${button.dataset.image}`;
+  button.addEventListener('mouseenter', () => fadeSwap(imageSrc));
+  button.addEventListener('focus', () => fadeSwap(imageSrc));
+  button.addEventListener('click', () => fadeSwap(imageSrc));
 });
 
-document.querySelector('.feature-grid').addEventListener('mouseleave', () => fadeSwap(defaultCottageSrc));
+featureGrid.addEventListener('pointerenter', preloadCottageImages, { once: true });
+featureGrid.addEventListener('focusin', preloadCottageImages, { once: true });
+featureGrid.addEventListener('mouseleave', () => fadeSwap(defaultCottageSrc));
 cottageImg.addEventListener('click', () => fadeSwap(defaultCottageSrc));
 
 // ── Lightbox ─────────────────────────────────────────────────────────────────
