@@ -19,7 +19,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"
     />
-    <link rel="stylesheet" href="assets/css/style.css?v=4" />
+    <link rel="stylesheet" href="assets/css/style.css?v=7" />
   </head>
   <body>
     <!-- Fixed video background — persists behind all sections -->
@@ -48,13 +48,13 @@
         data-label="Activities"
         aria-label="Activities"
       ></a>
+      <a href="#stay" class="dot" data-label="Stay" aria-label="Stay"></a>
       <a
         href="#gallery"
         class="dot"
         data-label="Gallery"
         aria-label="Gallery"
       ></a>
-      <a href="#stay" class="dot" data-label="Stay" aria-label="Stay"></a>
     </nav>
 
     <main class="scroll-container" id="scroll-container">
@@ -92,11 +92,27 @@
             need to enjoy the "midnight sun" on the beach in the summer.
           </p>
           <figure class="cottage-photo">
-            <img
-              src="assets/images/IMG_0966.webp"
-              alt="196 Droman seen from across the way"
-            />
-            <figcaption>Cottage on the right</figcaption>
+            <div class="cottage-photo__frame">
+              <img
+                src="assets/images/IMG_0966.webp"
+                alt="196 Droman seen from across the way"
+              />
+              <button
+                type="button"
+                class="cottage-photo__arrow cottage-photo__arrow--prev"
+                aria-label="Previous photo"
+              >
+                &#8249;
+              </button>
+              <button
+                type="button"
+                class="cottage-photo__arrow cottage-photo__arrow--next"
+                aria-label="Next photo"
+              >
+                &#8250;
+              </button>
+            </div>
+            <figcaption aria-live="polite">Cottage on the right</figcaption>
           </figure>
           <div class="feature-grid">
             <div class="feature-card">
@@ -109,7 +125,7 @@
                 </li>
                 <li>
                   <button type="button" data-image="IMG_5278.webp">
-                    Kitchen &amp; dining table (seats 6–8)
+                    Kitchen &amp; dining table (seats 6)
                   </button>
                 </li>
                 <li>
@@ -334,6 +350,81 @@
         </div>
       </section>
 
+      <!-- ── Stay -────────────────────────────────────────────────── -->
+      <section id="stay" class="section" aria-labelledby="stay-heading">
+        <div class="section-inner">
+          <header class="section-header">
+            <h2 id="stay-heading" class="section-title">Stay</h2>
+            <p class="section-intro">
+              196 Droman is our family home, but when we're not using it
+              ourselves it is available for others to enjoy at any time of year.
+            </p>
+          </header>
+          <p>
+            We are licensed by Highland Council for short term letting (licence
+            number HI-01240-F) for up to six people in three bedrooms. You can
+            find out more about the house, what's provided and what to expect in
+            the
+            <a href="#cottage">Cottage section</a>.
+          </p>
+          <p>
+            Prices vary according to the time of year and the length of your
+            stay. Our booking calendar shows what's currently available and the
+            price for the dates you're considering. Stays are normally Saturday
+            to Saturday, but we are very happy to accommodate adaptations to
+            that where possible. All bookings will be initially marked as
+            "pending". Please wait for confirmation from us BEFORE making any
+            other arrangements.
+          </p>
+          <p>
+            Cleaning & a linen change fee of £100 will be added to each booking.
+          </p>
+          <h3 class="content-heading">Before you book</h3>
+          <p>
+            Part of Droman's appeal is its location, but that also means it's
+            worth knowing what you're coming to. This is the far north-west of
+            Scotland. The weather can be glorious & wild - often in the same
+            day. Shops, restaurants and other facilities aren't on the doorstep,
+            and getting here takes a little effort.
+          </p>
+          <p>That's rather the point.</p>
+          <p>
+            Have a look through the <a href="#location">Location</a> and
+            <a href="#location">Getting Here</a> sections before you book.
+            They'll give you a much better idea of where 196 Droman is, what
+            there is to do and what staying here is actually like.
+          </p>
+          <h3 class="content-heading">A few practical things</h3>
+          <p>
+            196 accommodates a maximum of six people. Stays are subject to
+            availability and our minimum-stay requirements, which can vary
+            through the year. The current price, availability and any minimum
+            stay for your chosen dates are shown on the booking calendar.
+          </p>
+          <h3 class="content-heading">Questions?</h3>
+          <p>
+            Or you're wondering whether Droman will suit you, please get in
+            touch. We're very happy to answer questions about the house, the
+            journey or the area. We'd much rather you knew what to expect before
+            coming — and arrived looking forward to exactly the sort of place
+            196 is.
+          </p>
+          <h3 class="content-heading">Tariff</h3>
+          <p>
+            £450 - Low (October to March) £550 - Shoulder (April, May and
+            September) £650 - High (June, July, August, September) All plus
+            cleaning at fee to £100. Half terms, school holidays & Xmas, NY are
+            all classed as "High Season"
+          </p>
+          <script src="https://www.bookingmood.com/js/resize.js"></script>
+          <iframe
+            class="booking-calendar"
+            src="https://www.bookingmood.com/embed/f74a95f3-be1d-43a6-b83d-9e169e5e31a8?"
+            title="196 Droman availability and booking calendar"
+          ></iframe>
+        </div>
+      </section>
+
       <!-- ── Gallery ───────────────────────────────────────────────── -->
       <section id="gallery" class="section" aria-labelledby="gallery-heading">
         <div class="section-inner">
@@ -428,84 +519,9 @@
           </div>
         </div>
       </section>
-
-      <!-- ── Stay -────────────────────────────────────────────────── -->
-      <section id="stay" class="section" aria-labelledby="stay-heading">
-        <div class="section-inner">
-          <header class="section-header">
-            <h2 id="stay-heading" class="section-title">Stay</h2>
-            <p class="section-intro">
-              196 Droman is our family home, but when we're not using it
-              ourselves it is available for others to enjoy at any time of year.
-            </p>
-          </header>
-          <p>
-            We are licensed by Highland Council for short term letting (licence
-            number HI-01240-F) for up to six people in three bedrooms. You can
-            find out more about the house, what's provided and what to expect in
-            the
-            <a href="#cottage">Cottage section</a>.
-          </p>
-          <p>
-            Prices vary according to the time of year and the length of your
-            stay. Our booking calendar shows what's currently available and the
-            price for the dates you're considering. Stays are normally Saturday
-            to Saturday, but we are very happy to accommodate adaptations to
-            that where possible. All bookings will be initially marked as
-            "pending". Please wait for confirmation from us BEFORE making any
-            other arrangements.
-          </p>
-          <p>
-            Cleaning & a linen change fee of £100 will be added to each booking.
-          </p>
-          <h3 class="content-heading">Before you book</h3>
-          <p>
-            Part of Droman's appeal is its location, but that also means it's
-            worth knowing what you're coming to. This is the far north-west of
-            Scotland. The weather can be glorious & wild - often in the same
-            day. Shops, restaurants and other facilities aren't on the doorstep,
-            and getting here takes a little effort.
-          </p>
-          <p>That's rather the point.</p>
-          <p>
-            Have a look through the <a href="#location">Location</a> and
-            <a href="#location">Getting Here</a> sections before you book.
-            They'll give you a much better idea of where 196 Droman is, what
-            there is to do and what staying here is actually like.
-          </p>
-          <h3 class="content-heading">A few practical things</h3>
-          <p>
-            196 accommodates a maximum of six people. Stays are subject to
-            availability and our minimum-stay requirements, which can vary
-            through the year. The current price, availability and any minimum
-            stay for your chosen dates are shown on the booking calendar.
-          </p>
-          <h3 class="content-heading">Questions?</h3>
-          <p>
-            Or you're wondering whether Droman will suit you, please get in
-            touch. We're very happy to answer questions about the house, the
-            journey or the area. We'd much rather you knew what to expect before
-            coming — and arrived looking forward to exactly the sort of place
-            196 is.
-          </p>
-          <h3 class="content-heading">Tariff</h3>
-          <p>
-            £450 - Low (October to March) £550 - Shoulder (April, May and
-            September) £650 - High (June, July, August, September) All plus
-            cleaning at fee to £100. Half terms, school holidays & Xmas, NY are
-            all classed as "High Season"
-          </p>
-          <script src="https://www.bookingmood.com/js/resize.js"></script>
-          <iframe
-            class="booking-calendar"
-            src="https://www.bookingmood.com/embed/f74a95f3-be1d-43a6-b83d-9e169e5e31a8?"
-            title="196 Droman availability and booking calendar"
-          ></iframe>
-        </div>
-      </section>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="assets/js/main.js?v=3"></script>
+    <script src="assets/js/main.js?v=4"></script>
   </body>
 </html>

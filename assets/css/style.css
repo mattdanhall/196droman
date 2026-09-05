@@ -60,7 +60,7 @@ a:hover {
   z-index: 1;
   height: 100dvh;
   overflow-y: scroll;
-  scroll-snap-type: y mandatory;
+  scroll-snap-type: y proximity;
   scrollbar-width: none;
 }
 
@@ -75,7 +75,6 @@ a:hover {
 .section {
   min-height: 100dvh;
   scroll-snap-align: start;
-  scroll-snap-stop: always;
   position: relative;
   display: flex;
   align-items: center;
@@ -252,9 +251,51 @@ h3 {
   margin-bottom: 2rem;
 }
 
+.cottage-photo__frame {
+  position: relative;
+}
+
+.cottage-photo__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  background: rgba(13, 17, 23, 0.55);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: inherit;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+  z-index: 1;
+}
+
+.cottage-photo__arrow:hover,
+.cottage-photo__arrow:focus-visible {
+  background: rgba(13, 17, 23, 0.85);
+  color: #fff;
+}
+
+.cottage-photo__arrow--prev {
+  left: 0.75rem;
+}
+
+.cottage-photo__arrow--next {
+  right: 0.75rem;
+}
+
 .cottage-photo img {
   width: 100%;
-  max-height: 38vh;
+  max-height: 52vh;
   object-fit: cover;
   display: block;
   transition: opacity 0.2s;

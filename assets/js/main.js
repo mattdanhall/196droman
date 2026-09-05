@@ -60,43 +60,83 @@ dots.forEach((dot) => {
 });
 
 // ── Cottage photo swap ───────────────────────────────────────────────────────
-const cottageImg        = document.querySelector('.cottage-photo img');
-const cottageCaption    = document.querySelector('.cottage-photo figcaption');
+const cottageImg     = document.querySelector('.cottage-photo img');
+const cottageCaption = document.querySelector('.cottage-photo figcaption');
+const cottagePrev    = document.querySelector('.cottage-photo__arrow--prev');
+const cottageNext    = document.querySelector('.cottage-photo__arrow--next');
 const defaultCottageSrc = 'assets/images/IMG_0966.webp';
-const featureGrid       = document.querySelector('.feature-grid');
-const featureButtons    = [...document.querySelectorAll('.feature-card button[data-image]')];
+const featureGrid    = document.querySelector('.feature-grid');
+const featureButtons = [...document.querySelectorAll('.feature-card button[data-image]')];
+
+const cottageImages = [
+  {
+    src: defaultCottageSrc,
+    label: 'Cottage on the right',
+    alt: '196 Droman seen from across the way',
+  },
+  ...featureButtons.map((button) => ({
+    src: `assets/images/${button.dataset.image}`,
+    label: button.textContent.trim(),
+    alt: button.textContent.trim(),
+  })),
+];
+
+let cottageIndex = 0;
+let selectedCottageIndex = 0;
 let cottageImagesPreloaded = false;
+let cottageFadeTimer;
 
 function preloadCottageImages() {
   if (cottageImagesPreloaded) return;
 
   cottageImagesPreloaded = true;
-  featureButtons.forEach((button) => {
-    const image = new Image();
-    image.src = `assets/images/${button.dataset.image}`;
+  cottageImages.forEach((image) => {
+    new Image().src = image.src;
   });
 }
 
-function fadeSwap(src) {
+function showCottageImage(index) {
+  cottageIndex = (index + cottageImages.length) % cottageImages.length;
+  const image = cottageImages[cottageIndex];
+
+  clearTimeout(cottageFadeTimer);
   cottageImg.style.opacity = '0';
-  setTimeout(() => {
-    cottageImg.src = src;
+  cottageFadeTimer = setTimeout(() => {
+    cottageImg.src = image.src;
+    cottageImg.alt = image.alt;
     cottageImg.style.opacity = '1';
-    cottageCaption.style.visibility = src === defaultCottageSrc ? 'visible' : 'hidden';
+    cottageCaption.textContent = image.label;
   }, 200);
 }
 
+function selectCottageImage(index) {
+  selectedCottageIndex = index;
+  showCottageImage(index);
+}
+
 featureButtons.forEach((button) => {
-  const imageSrc = `assets/images/${button.dataset.image}`;
-  button.addEventListener('mouseenter', () => fadeSwap(imageSrc));
-  button.addEventListener('focus', () => fadeSwap(imageSrc));
-  button.addEventListener('click', () => fadeSwap(imageSrc));
+  const index = featureButtons.indexOf(button) + 1;
+  button.addEventListener('mouseenter', () => showCottageImage(index));
+  button.addEventListener('focus', () => showCottageImage(index));
+  button.addEventListener('click', () => selectCottageImage(index));
 });
+
+cottagePrev.addEventListener('click', () => selectCottageImage(cottageIndex - 1));
+cottageNext.addEventListener('click', () => selectCottageImage(cottageIndex + 1));
 
 featureGrid.addEventListener('pointerenter', preloadCottageImages, { once: true });
 featureGrid.addEventListener('focusin', preloadCottageImages, { once: true });
-featureGrid.addEventListener('mouseleave', () => fadeSwap(defaultCottageSrc));
-cottageImg.addEventListener('click', () => fadeSwap(defaultCottageSrc));
+featureGrid.addEventListener('mouseleave', () => showCottageImage(selectedCottageIndex));
+cottageImg.addEventListener('click', () => selectCottageImage(0));
+
+const cottageObserver = new IntersectionObserver(
+  (entries) => {
+    if (entries[0].isIntersecting) preloadCottageImages();
+  },
+  { root: scrollContainer, threshold: 0.1 }
+);
+
+cottageObserver.observe(document.getElementById('cottage'));
 
 // ── Lightbox ─────────────────────────────────────────────────────────────────
 const lightbox = document.createElement('div');
@@ -157,9 +197,15 @@ const DROMAN_LAT  = 58.485568;
 const DROMAN_LNG  = -5.109298;
 const W3W_ADDRESS = 'pleaser.bandaged.skis';
 
+// Fully non-interactive on touch devices so swipes always scroll the page past the map
+const isTouchPrimary = window.matchMedia('(pointer: coarse)').matches;
+
 const map = L.map('map', {
-  zoomControl: true,
+  zoomControl: !isTouchPrimary,
   scrollWheelZoom: false, // prevent scroll hijack when snap-scrolling the page
+  dragging: !isTouchPrimary,
+  touchZoom: !isTouchPrimary,
+  doubleClickZoom: !isTouchPrimary,
 }).setView([54.5, -3.5], 5); // UK overview
 
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
